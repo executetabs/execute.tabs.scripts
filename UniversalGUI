@@ -1,0 +1,243 @@
+-- Gui to Lua
+-- Version: 3.2
+-- Created by @execute.tabs
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainGUI = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local AcutalFrame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local FlyButton = Instance.new("TextButton")
+local Hitbox = Instance.new("TextButton")
+local Tptool = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainGUI.Name = "MainGUI"
+MainGUI.Parent = ScreenGui
+MainGUI.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
+MainGUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainGUI.BorderSizePixel = 0
+MainGUI.Position = UDim2.new(0.0979097933, 0, 0.215355799, 0)
+MainGUI.Size = UDim2.new(0, 466, 0, 295)
+
+UICorner.Parent = MainGUI
+
+AcutalFrame.Name = "Acutal Frame"
+AcutalFrame.Parent = MainGUI
+AcutalFrame.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+AcutalFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AcutalFrame.BorderSizePixel = 0
+AcutalFrame.Position = UDim2.new(0.0373219512, 0, 0.0486828834, 0)
+AcutalFrame.Size = UDim2.new(0, 431, 0, 266)
+
+TextLabel.Parent = MainGUI
+TextLabel.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 3
+TextLabel.Position = UDim2.new(0.0373219512, 0, 0.047457628, 0)
+TextLabel.Size = UDim2.new(0, 431, 0, 42)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "@execute.tabs GUI"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 47.000
+
+FlyButton.Name = "FlyButton"
+FlyButton.Parent = MainGUI
+FlyButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+FlyButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FlyButton.BorderSizePixel = 0
+FlyButton.Position = UDim2.new(0.103004292, 0, 0.267796606, 0)
+FlyButton.Size = UDim2.new(0, 152, 0, 40)
+FlyButton.Font = Enum.Font.SourceSansBold
+FlyButton.Text = "FLY K=G"
+FlyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+FlyButton.TextSize = 41.000
+FlyButton.MouseButton1Down:connect(function()
+	repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+	local mouse = game.Players.LocalPlayer:GetMouse() 
+	repeat wait() until mouse
+	local plr = game.Players.LocalPlayer 
+	local torso = plr.Character.Head 
+	local flying = false
+	local deb = true 
+	local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+	local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+	local maxspeed = 400 
+	local speed = 5000 
+
+	function Fly() 
+		local bg = Instance.new("BodyGyro", torso) 
+		bg.P = 9e4 
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+		bg.cframe = torso.CFrame 
+		local bv = Instance.new("BodyVelocity", torso) 
+		bv.velocity = Vector3.new(0,0.1,0) 
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+		repeat wait() 
+			plr.Character.Humanoid.PlatformStand = true 
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+				speed = speed+.5+(speed/maxspeed) 
+				if speed > maxspeed then 
+					speed = maxspeed 
+				end 
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+				speed = speed-1 
+				if speed < 0 then 
+					speed = 0 
+				end 
+			end 
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+			else 
+				bv.velocity = Vector3.new(0,0.1,0) 
+			end 
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+		until not flying 
+		ctrl = {f = 0, b = 0, l = 0, r = 0} 
+		lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+		speed = 0 
+		bg:Destroy() 
+		bv:Destroy() 
+		plr.Character.Humanoid.PlatformStand = false 
+	end 
+	mouse.KeyDown:connect(function(key) 
+		if key:lower() == "g" then 
+			if flying then flying = false 
+			else 
+				flying = true 
+				Fly() 
+			end 
+		elseif key:lower() == "w" then 
+			ctrl.f = 1 
+		elseif key:lower() == "s" then 
+			ctrl.b = -1 
+		elseif key:lower() == "a" then 
+			ctrl.l = -1 
+		elseif key:lower() == "d" then 
+			ctrl.r = 1 
+		end 
+	end) 
+	mouse.KeyUp:connect(function(key) 
+		if key:lower() == "w" then 
+			ctrl.f = 0 
+		elseif key:lower() == "s" then 
+			ctrl.b = 0 
+		elseif key:lower() == "a" then 
+			ctrl.l = 0 
+		elseif key:lower() == "d" then 
+			ctrl.r = 0 
+		end 
+	end)
+	Fly()
+end)
+
+Hitbox.Name = "Hitbox"
+Hitbox.Parent = MainGUI
+Hitbox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Hitbox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Hitbox.BorderSizePixel = 0
+Hitbox.Position = UDim2.new(0.536480665, 0, 0.267796606, 0)
+Hitbox.Size = UDim2.new(0, 152, 0, 40)
+Hitbox.Font = Enum.Font.SourceSansBold
+Hitbox.Text = "NOCLIP"
+Hitbox.TextColor3 = Color3.fromRGB(0, 0, 0)
+Hitbox.TextSize = 41.000
+Hitbox.MouseButton1Down:connect(function()
+	local StealthMode = true -- If game has an anticheat that checks the logs
+
+	local Indicator
+
+	if not StealthMode then
+		local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+		print("NOCLIP: Press Q to Activate")
+		Indicator = Instance.new("TextLabel", ScreenGui)
+		Indicator.AnchorPoint = Vector2.new(0, 1)
+		Indicator.Position = UDim2.new(0, 0, 1, 0)
+		Indicator.Size = UDim2.new(0, 200, 0, 50)
+		Indicator.BackgroundTransparency = 1
+		Indicator.TextScaled = true
+		Indicator.TextStrokeTransparency = 0
+		Indicator.TextColor3 = Color3.new(0, 0, 0)
+		Indicator.TextStrokeColor3 = Color3.new(1, 1, 1)
+		Indicator.Text = "Noclip: Enabled"
+	end
+
+	local noclip = true
+	local player = game.Players.LocalPlayer
+	local character = player.Character or player.CharacterAdded:Wait()
+
+	local mouse = player:GetMouse()
+
+	mouse.KeyDown:Connect(function(key)
+		if key == "q" then
+			noclip = not noclip
+
+			if not StealthMode then
+				Indicator.Text = "Noclip: " .. (noclip and "Enabled" or "Disabled")
+			end
+		end
+	end)
+
+	while true do
+		player = game.Players.LocalPlayer
+		character = player.Character
+
+		if noclip then
+			for _, v in pairs(character:GetDescendants()) do
+				pcall(function()
+					if v:IsA("BasePart") then
+						v.CanCollide = false
+					end
+				end)
+			end
+		end
+
+		game:GetService("RunService").Stepped:wait()
+	end
+end)
+
+Tptool.Name = "Tptool"
+Tptool.Parent = MainGUI
+Tptool.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Tptool.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tptool.BorderSizePixel = 0
+Tptool.Position = UDim2.new(0.30901289, 0, 0.555932224, 0)
+Tptool.Size = UDim2.new(0, 152, 0, 40)
+Tptool.Font = Enum.Font.SourceSansBold
+Tptool.Text = "TP.TOOL"
+Tptool.TextColor3 = Color3.fromRGB(0, 0, 0)
+Tptool.TextSize = 41.000
+Tptool.MouseButton1Down:connect(function() 
+
+		mouse = game.Players.LocalPlayer:GetMouse()
+		tool = Instance.new("Tool")
+		tool.RequiresHandle = false
+		tool.Name = "Click Teleport"
+		tool.Activated:connect(function()
+			local pos = mouse.Hit+Vector3.new(0,2.5,0)
+			pos = CFrame.new(pos.X,pos.Y,pos.Z)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+		end)
+		tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+-- Scripts:
+
+local function RMRB_fake_script() -- ScreenGui.Script 
+	local script = Instance.new('Script', ScreenGui)
+
+	frame = script.Parent.MainGUI -- Take out {}s, and put name of frame
+	frame.Draggable = true
+	frame.Active = true
+	frame.Selectable = true
+end
+coroutine.wrap(RMRB_fake_script)()
