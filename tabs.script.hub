@@ -1,0 +1,1867 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainGUI = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local AcutalFrame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local FlyButton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local NoClip = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local Tptool = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local Headless = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local Walkspeed = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local Airhub = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local ESP = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainGUI.Name = "MainGUI"
+MainGUI.Parent = ScreenGui
+MainGUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainGUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainGUI.BorderSizePixel = 0
+MainGUI.Position = UDim2.new(0.0979097933, 0, 0.215355799, 0)
+MainGUI.Size = UDim2.new(0, 466, 0, 295)
+
+UICorner.Parent = MainGUI
+
+AcutalFrame.Name = "Acutal Frame"
+AcutalFrame.Parent = MainGUI
+AcutalFrame.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+AcutalFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AcutalFrame.BorderSizePixel = 0
+AcutalFrame.Position = UDim2.new(0.0373219512, 0, 0.0486828834, 0)
+AcutalFrame.Size = UDim2.new(0, 431, 0, 266)
+
+TextLabel.Parent = MainGUI
+TextLabel.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 3
+TextLabel.Position = UDim2.new(0.0373219512, 0, 0.047457628, 0)
+TextLabel.Size = UDim2.new(0, 431, 0, 42)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "execute.tabs SCIPT HUB"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 41.000
+
+FlyButton.Name = "FlyButton"
+FlyButton.Parent = MainGUI
+FlyButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+FlyButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FlyButton.BorderSizePixel = 0
+FlyButton.Position = UDim2.new(0.154506445, 0, 0.247457623, 0)
+FlyButton.Size = UDim2.new(0, 141, 0, 30)
+FlyButton.Font = Enum.Font.SourceSansBold
+FlyButton.Text = "FLY KB = G"
+FlyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+FlyButton.TextSize = 31.000
+
+UICorner_2.Parent = FlyButton
+FlyButton.MouseButton1Down:connect(function()
+	repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+	local mouse = game.Players.LocalPlayer:GetMouse() 
+	repeat wait() until mouse
+	local plr = game.Players.LocalPlayer 
+	local torso = plr.Character.Head 
+	local flying = false
+	local deb = true 
+	local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+	local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+	local maxspeed = 400 
+	local speed = 5000 
+
+	function Fly() 
+		local bg = Instance.new("BodyGyro", torso) 
+		bg.P = 9e4 
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+		bg.cframe = torso.CFrame 
+		local bv = Instance.new("BodyVelocity", torso) 
+		bv.velocity = Vector3.new(0,0.1,0) 
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+		repeat wait() 
+			plr.Character.Humanoid.PlatformStand = true 
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+				speed = speed+.5+(speed/maxspeed) 
+				if speed > maxspeed then 
+					speed = maxspeed 
+				end 
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+				speed = speed-1 
+				if speed < 0 then 
+					speed = 0 
+				end 
+			end 
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+			else 
+				bv.velocity = Vector3.new(0,0.1,0) 
+			end 
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+		until not flying 
+		ctrl = {f = 0, b = 0, l = 0, r = 0} 
+		lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+		speed = 0 
+		bg:Destroy() 
+		bv:Destroy() 
+		plr.Character.Humanoid.PlatformStand = false 
+	end 
+	mouse.KeyDown:connect(function(key) 
+		if key:lower() == "g" then 
+			if flying then flying = false 
+			else 
+				flying = true 
+				Fly() 
+			end 
+		elseif key:lower() == "w" then 
+			ctrl.f = 1 
+		elseif key:lower() == "s" then 
+			ctrl.b = -1 
+		elseif key:lower() == "a" then 
+			ctrl.l = -1 
+		elseif key:lower() == "d" then 
+			ctrl.r = 1 
+		end 
+	end) 
+	mouse.KeyUp:connect(function(key) 
+		if key:lower() == "w" then 
+			ctrl.f = 0 
+		elseif key:lower() == "s" then 
+			ctrl.b = 0 
+		elseif key:lower() == "a" then 
+			ctrl.l = 0 
+		elseif key:lower() == "d" then 
+			ctrl.r = 0 
+		end 
+	end)
+	Fly()
+end)
+
+NoClip.Name = "NoClip"
+NoClip.Parent = MainGUI
+NoClip.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+NoClip.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NoClip.BorderSizePixel = 0
+NoClip.Position = UDim2.new(0.154506445, 0, 0.515254259, 0)
+NoClip.Size = UDim2.new(0, 141, 0, 27)
+NoClip.Font = Enum.Font.SourceSansBold
+NoClip.Text = "NOCLIP"
+NoClip.TextColor3 = Color3.fromRGB(0, 0, 0)
+NoClip.TextSize = 31.000
+
+UICorner_3.Parent = NoClip
+NoClip.MouseButton1Down:connect(function()
+	local StealthMode = true -- If game has an anticheat that checks the logs
+ 
+local Indicator
+ 
+if not StealthMode then
+    local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+    print("NOCLIP: Press Q to Activate")
+    Indicator = Instance.new("TextLabel", ScreenGui)
+    Indicator.AnchorPoint = Vector2.new(0, 1)
+    Indicator.Position = UDim2.new(0, 0, 1, 0)
+    Indicator.Size = UDim2.new(0, 200, 0, 50)
+    Indicator.BackgroundTransparency = 1
+    Indicator.TextScaled = true
+    Indicator.TextStrokeTransparency = 0
+    Indicator.TextColor3 = Color3.new(0, 0, 0)
+    Indicator.TextStrokeColor3 = Color3.new(1, 1, 1)
+    Indicator.Text = "Noclip: Enabled"
+end
+ 
+local noclip = true
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+ 
+local mouse = player:GetMouse()
+ 
+mouse.KeyDown:Connect(function(key)
+    if key == "q" then
+        noclip = not noclip
+ 
+        if not StealthMode then
+            Indicator.Text = "Noclip: " .. (noclip and "Enabled" or "Disabled")
+        end
+    end
+end)
+ 
+while true do
+    player = game.Players.LocalPlayer
+    character = player.Character
+ 
+    if noclip then
+        for _, v in pairs(character:GetDescendants()) do
+            pcall(function()
+                if v:IsA("BasePart") then
+                    v.CanCollide = false
+                end
+            end)
+        end
+    end
+ 
+    game:GetService("RunService").Stepped:wait()
+end
+end)
+
+Tptool.Name = "Tptool"
+Tptool.Parent = MainGUI
+Tptool.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Tptool.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tptool.BorderSizePixel = 0
+Tptool.Position = UDim2.new(0.154506445, 0, 0.379661024, 0)
+Tptool.Size = UDim2.new(0, 141, 0, 28)
+Tptool.Font = Enum.Font.SourceSansBold
+Tptool.Text = "TP.TOOL"
+Tptool.TextColor3 = Color3.fromRGB(0, 0, 0)
+Tptool.TextSize = 31.000
+
+UICorner_4.Parent = Tptool
+Tptool.MouseButton1Down:connect(function()
+	mouse = game.Players.LocalPlayer:GetMouse()
+	tool = Instance.new("Tool")
+	tool.RequiresHandle = false
+	tool.Name = "Click Teleport"
+	tool.Activated:connect(function()
+		local pos = mouse.Hit+Vector3.new(0,2.5,0)
+		pos = CFrame.new(pos.X,pos.Y,pos.Z)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+	end)
+	tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+Headless.Name = "Headless"
+Headless.Parent = MainGUI
+Headless.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Headless.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Headless.BorderSizePixel = 0
+Headless.Position = UDim2.new(0.154506445, 0, 0.644067824, 0)
+Headless.Size = UDim2.new(0, 141, 0, 27)
+Headless.Font = Enum.Font.SourceSansBold
+Headless.Text = "FE HEADLESS"
+Headless.TextColor3 = Color3.fromRGB(0, 0, 0)
+Headless.TextSize = 26.000
+
+UICorner_5.Parent = Headless
+Headless.MouseButton1Down:connect(function()
+	local lp = game:GetService "Players".LocalPlayer
+	if lp.Character:FindFirstChild "Head" then
+		local char = lp.Character
+		char.Archivable = true
+		local new = char:Clone()
+		new.Parent = workspace
+		lp.Character = new
+		wait(2)
+		local oldhum = char:FindFirstChildWhichIsA "Humanoid"
+		local newhum = oldhum:Clone()
+		newhum.Parent = char
+		newhum.RequiresNeck = false
+		oldhum.Parent = nil
+		wait(2)
+		lp.Character = char
+		new:Destroy()
+		wait(1)
+		newhum:GetPropertyChangedSignal("Health"):Connect(
+		function()
+			if newhum.Health <= 0 then
+				oldhum.Parent = lp.Character
+				wait(1)
+				oldhum:Destroy()
+			end
+		end)
+		workspace.CurrentCamera.CameraSubject = char
+		if char:FindFirstChild "Animate" then
+			char.Animate.Disabled = true
+			wait(.1)
+			char.Animate.Disabled = false
+		end
+		lp.Character:FindFirstChild "Head":Destroy()
+	end
+end)
+
+Walkspeed.Name = "Walkspeed"
+Walkspeed.Parent = MainGUI
+Walkspeed.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Walkspeed.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Walkspeed.BorderSizePixel = 0
+Walkspeed.Position = UDim2.new(0.154506445, 0, 0.772881329, 0)
+Walkspeed.Size = UDim2.new(0, 141, 0, 27)
+Walkspeed.Font = Enum.Font.SourceSansBold
+Walkspeed.Text = "Walkspeed (100)"
+Walkspeed.TextColor3 = Color3.fromRGB(0, 0, 0)
+Walkspeed.TextSize = 22.000
+
+UICorner_6.Parent = Walkspeed
+Walkspeed.MouseButton1Down:connect(function()
+	_G.HackedWalkSpeed = 100
+
+	local Plrs = game:GetService("Players")
+
+	local MyPlr = Plrs.LocalPlayer
+	local MyChar = MyPlr.Character
+
+	if MyChar then
+		local Hum = MyChar.Humanoid
+		Hum.Changed:connect(function()
+			Hum.WalkSpeed = _G.HackedWalkSpeed
+		end)
+		Hum.WalkSpeed = _G.HackedWalkSpeed
+	end
+
+
+	MyPlr.CharacterAdded:connect(function(Char)
+		MyChar = Char
+		repeat wait() until Char:FindFirstChild("Humanoid")
+		local Hum = Char.Humanoid
+		Hum.Changed:connect(function()
+			Hum.WalkSpeed = _G.HackedWalkSpeed
+		end)
+		Hum.WalkSpeed = _G.HackedWalkSpeed
+	end)
+end)
+
+Airhub.Name = "Airhub"
+Airhub.Parent = MainGUI
+Airhub.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Airhub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Airhub.BorderSizePixel = 0
+Airhub.Position = UDim2.new(0.551502168, 0, 0.25762713, 0)
+Airhub.Size = UDim2.new(0, 141, 0, 27)
+Airhub.Font = Enum.Font.SourceSansBold
+Airhub.Text = "Airhub"
+Airhub.TextColor3 = Color3.fromRGB(0, 0, 0)
+Airhub.TextSize = 31.000
+
+UICorner_7.Parent = Airhub
+Airhub.MouseButton1Down:connect(function()
+	--[[
+
+	AirHub V2 by Exunys © CC0 1.0 Universal (2023)
+	https://github.com/Exunys
+
+]]
+
+	--// Loaded Check
+
+	if AirHubV2Loaded or AirHub then
+		return
+	end
+
+	--// Cache
+
+	local game = game
+	local loadstring, typeof, select, next, pcall = loadstring, typeof, select, next, pcall
+	local tablefind, tablesort = table.find, table.sort
+	local mathfloor = math.floor
+	local stringgsub = string.gsub
+	local wait, delay, spawn = task.wait, task.delay, task.spawn
+	local osdate = os.date
+
+	--// Launching
+
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Roblox-Functions-Library/main/Library.lua"))()
+
+	local GUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/AirHub-V2/main/src/UI%20Library.lua"))()
+	local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Exunys-ESP/main/src/ESP.lua"))()
+	local Aimbot = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
+
+	--// Variables
+
+	local MainFrame = GUI:Load()
+
+	local ESP_DeveloperSettings = ESP.DeveloperSettings
+	local ESP_Settings = ESP.Settings
+	local ESP_Properties = ESP.Properties
+	local Crosshair = ESP_Properties.Crosshair
+	local CenterDot = Crosshair.CenterDot
+
+	local Aimbot_DeveloperSettings = Aimbot.DeveloperSettings
+	local Aimbot_Settings = Aimbot.Settings
+	local Aimbot_FOV = Aimbot.FOVSettings
+
+	ESP_Settings.LoadConfigOnLaunch = false
+	ESP_Settings.Enabled = false
+	Crosshair.Enabled = false
+	Aimbot_Settings.Enabled = false
+
+	local Fonts = {"UI", "System", "Plex", "Monospace"}
+	local TracerPositions = {"Bottom", "Center", "Mouse"}
+	local HealthBarPositions = {"Top", "Bottom", "Left", "Right"}
+
+	--// Tabs
+
+	local General = MainFrame:Tab("General")
+	local _Aimbot = MainFrame:Tab("Aimbot")
+	local _ESP = MainFrame:Tab("ESP")
+	local _Crosshair = MainFrame:Tab("Crosshair")
+	local Settings = MainFrame:Tab("Settings")
+
+	--// Functions
+
+	local AddValues = function(Section, Object, Exceptions, Prefix)
+		local Keys, Copy = {}, {}
+
+		for Index, _ in next, Object do
+			Keys[#Keys + 1] = Index
+		end
+
+		tablesort(Keys, function(A, B)
+			return A < B
+		end)
+
+		for _, Value in next, Keys do
+			Copy[Value] = Object[Value]
+		end
+
+		for Index, Value in next, Copy do
+			if typeof(Value) ~= "boolean" or (Exceptions and tablefind(Exceptions, Index)) then
+				continue
+			end
+
+			Section:Toggle({
+				Name = stringgsub(Index, "(%l)(%u)", function(...)
+					return select(1, ...).." "..select(2, ...)
+				end),
+				Flag = Prefix..Index,
+				Default = Value,
+				Callback = function(_Value)
+					Object[Index] = _Value
+				end
+			})
+		end
+
+		for Index, Value in next, Copy do
+			if typeof(Value) ~= "Color3" or (Exceptions and tablefind(Exceptions, Index)) then
+				continue
+			end
+
+			Section:Colorpicker({
+				Name = stringgsub(Index, "(%l)(%u)", function(...)
+					return select(1, ...).." "..select(2, ...)
+				end),
+				Flag = Index,
+				Default = Value,
+				Callback = function(_Value)
+					Object[Index] = _Value
+				end
+			})
+		end
+	end
+
+	--// General Tab
+
+	local AimbotSection = General:Section({
+		Name = "Aimbot Settings",
+		Side = "Left"
+	})
+
+	local ESPSection = General:Section({
+		Name = "ESP Settings",
+		Side = "Right"
+	})
+
+	local ESPDeveloperSection = General:Section({
+		Name = "ESP Developer Settings",
+		Side = "Right"
+	})
+
+	AddValues(ESPDeveloperSection, ESP_DeveloperSettings, {}, "ESP_DeveloperSettings_")
+
+	ESPDeveloperSection:Dropdown({
+		Name = "Update Mode",
+		Flag = "ESP_UpdateMode",
+		Content = {"RenderStepped", "Stepped", "Heartbeat"},
+		Default = ESP_DeveloperSettings.UpdateMode,
+		Callback = function(Value)
+			ESP_DeveloperSettings.UpdateMode = Value
+		end
+	})
+
+	ESPDeveloperSection:Dropdown({
+		Name = "Team Check Option",
+		Flag = "ESP_TeamCheckOption",
+		Content = {"TeamColor", "Team"},
+		Default = ESP_DeveloperSettings.TeamCheckOption,
+		Callback = function(Value)
+			ESP_DeveloperSettings.TeamCheckOption = Value
+		end
+	})
+
+	ESPDeveloperSection:Slider({
+		Name = "Rainbow Speed",
+		Flag = "ESP_RainbowSpeed",
+		Default = ESP_DeveloperSettings.RainbowSpeed * 10,
+		Min = 5,
+		Max = 30,
+		Callback = function(Value)
+			ESP_DeveloperSettings.RainbowSpeed = Value / 10
+		end
+	})
+
+	ESPDeveloperSection:Slider({
+		Name = "Width Boundary",
+		Flag = "ESP_WidthBoundary",
+		Default = ESP_DeveloperSettings.WidthBoundary * 10,
+		Min = 5,
+		Max = 30,
+		Callback = function(Value)
+			ESP_DeveloperSettings.WidthBoundary = Value / 10
+		end
+	})
+
+	ESPDeveloperSection:Button({
+		Name = "Refresh",
+		Callback = function()
+			ESP:Restart()
+		end
+	})
+
+	AddValues(ESPSection, ESP_Settings, {"LoadConfigOnLaunch", "PartsOnly"}, "ESPSettings_")
+
+	AimbotSection:Toggle({
+		Name = "Enabled",
+		Flag = "Aimbot_Enabled",
+		Default = Aimbot_Settings.Enabled,
+		Callback = function(Value)
+			Aimbot_Settings.Enabled = Value
+		end
+	})
+
+	AddValues(AimbotSection, Aimbot_Settings, {"Enabled", "Toggle", "OffsetToMoveDirection"}, "Aimbot_")
+
+	local AimbotDeveloperSection = General:Section({
+		Name = "Aimbot Developer Settings",
+		Side = "Left"
+	})
+
+	AimbotDeveloperSection:Dropdown({
+		Name = "Update Mode",
+		Flag = "Aimbot_UpdateMode",
+		Content = {"RenderStepped", "Stepped", "Heartbeat"},
+		Default = Aimbot_DeveloperSettings.UpdateMode,
+		Callback = function(Value)
+			Aimbot_DeveloperSettings.UpdateMode = Value
+		end
+	})
+
+	AimbotDeveloperSection:Dropdown({
+		Name = "Team Check Option",
+		Flag = "Aimbot_TeamCheckOption",
+		Content = {"TeamColor", "Team"},
+		Default = Aimbot_DeveloperSettings.TeamCheckOption,
+		Callback = function(Value)
+			Aimbot_DeveloperSettings.TeamCheckOption = Value
+		end
+	})
+
+	AimbotDeveloperSection:Slider({
+		Name = "Rainbow Speed",
+		Flag = "Aimbot_RainbowSpeed",
+		Default = Aimbot_DeveloperSettings.RainbowSpeed * 10,
+		Min = 5,
+		Max = 30,
+		Callback = function(Value)
+			Aimbot_DeveloperSettings.RainbowSpeed = Value / 10
+		end
+	})
+
+	AimbotDeveloperSection:Button({
+		Name = "Refresh",
+		Callback = function()
+			Aimbot.Restart()
+		end
+	})
+
+	--// Aimbot Tab
+
+	local AimbotPropertiesSection = _Aimbot:Section({
+		Name = "Properties",
+		Side = "Left"
+	})
+
+	AimbotPropertiesSection:Toggle({
+		Name = "Toggle",
+		Flag = "Aimbot_Toggle",
+		Default = Aimbot_Settings.Toggle,
+		Callback = function(Value)
+			Aimbot_Settings.Toggle = Value
+		end
+	})
+
+	AimbotPropertiesSection:Toggle({
+		Name = "Offset To Move Direction",
+		Flag = "Aimbot_OffsetToMoveDirection",
+		Default = Aimbot_Settings.OffsetToMoveDirection,
+		Callback = function(Value)
+			Aimbot_Settings.OffsetToMoveDirection = Value
+		end
+	})
+
+	AimbotPropertiesSection:Slider({
+		Name = "Offset Increment",
+		Flag = "Aimbot_OffsetIncrementy",
+		Default = Aimbot_Settings.OffsetIncrement,
+		Min = 1,
+		Max = 30,
+		Callback = function(Value)
+			Aimbot_Settings.OffsetIncrement = Value
+		end
+	})
+
+	AimbotPropertiesSection:Slider({
+		Name = "Animation Sensitivity (ms)",
+		Flag = "Aimbot_Sensitivity",
+		Default = Aimbot_Settings.Sensitivity * 100,
+		Min = 0,
+		Max = 100,
+		Callback = function(Value)
+			Aimbot_Settings.Sensitivity = Value / 100
+		end
+	})
+
+	AimbotPropertiesSection:Slider({
+		Name = "mousemoverel Sensitivity",
+		Flag = "Aimbot_Sensitivity2",
+		Default = Aimbot_Settings.Sensitivity2 * 100,
+		Min = 0,
+		Max = 500,
+		Callback = function(Value)
+			Aimbot_Settings.Sensitivity2 = Value / 100
+		end
+	})
+
+	AimbotPropertiesSection:Dropdown({
+		Name = "Lock Mode",
+		Flag = "Aimbot_Settings_LockMode",
+		Content = {"CFrame", "mousemoverel"},
+		Default = Aimbot_Settings.LockMode == 1 and "CFrame" or "mousemoverel",
+		Callback = function(Value)
+			Aimbot_Settings.LockMode = Value == "CFrame" and 1 or 2
+		end
+	})
+
+	AimbotPropertiesSection:Dropdown({
+		Name = "Lock Part",
+		Flag = "Aimbot_LockPart",
+		Content = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"},
+		Default = Aimbot_Settings.LockPart,
+		Callback = function(Value)
+			Aimbot_Settings.LockPart = Value
+		end
+	})
+
+	AimbotPropertiesSection:Keybind({
+		Name = "Trigger Key",
+		Flag = "Aimbot_TriggerKey",
+		Default = Aimbot_Settings.TriggerKey,
+		Callback = function(Keybind)
+			Aimbot_Settings.TriggerKey = Keybind
+		end
+	})
+
+	local UserBox = AimbotPropertiesSection:Box({
+		Name = "Player Name (shortened allowed)",
+		Flag = "Aimbot_PlayerName",
+		Placeholder = "Username"
+	})
+
+	AimbotPropertiesSection:Button({
+		Name = "Blacklist (Ignore) Player",
+		Callback = function()
+			pcall(Aimbot.Blacklist, Aimbot, GUI.flags["Aimbot_PlayerName"])
+			UserBox:Set("")
+		end
+	})
+
+	AimbotPropertiesSection:Button({
+		Name = "Whitelist Player",
+		Callback = function()
+			pcall(Aimbot.Blacklist, Aimbot, GUI.flags["Aimbot_PlayerName"])
+			UserBox:Set("")
+		end
+	})
+
+	local AimbotFOVSection = _Aimbot:Section({
+		Name = "Field Of View Settings",
+		Side = "Right"
+	})
+
+	AddValues(AimbotFOVSection, Aimbot_FOV, {}, "Aimbot_FOV_")
+
+	AimbotFOVSection:Slider({
+		Name = "Field Of View",
+		Flag = "Aimbot_FOV_Radius",
+		Default = Aimbot_FOV.Radius,
+		Min = 0,
+		Max = 720,
+		Callback = function(Value)
+			Aimbot_FOV.Radius = Value
+		end
+	})
+
+	AimbotFOVSection:Slider({
+		Name = "Sides",
+		Flag = "Aimbot_FOV_NumSides",
+		Default = Aimbot_FOV.NumSides,
+		Min = 3,
+		Max = 60,
+		Callback = function(Value)
+			Aimbot_FOV.NumSides = Value
+		end
+	})
+
+	AimbotFOVSection:Slider({
+		Name = "Transparency",
+		Flag = "Aimbot_FOV_Transparency",
+		Default = Aimbot_FOV.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			Aimbot_FOV.Transparency = Value / 10
+		end
+	})
+
+	AimbotFOVSection:Slider({
+		Name = "Thickness",
+		Flag = "Aimbot_FOV_Thickness",
+		Default = Aimbot_FOV.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			Aimbot_FOV.Thickness = Value
+		end
+	})
+
+	--// ESP Tab
+
+	local ESP_Properties_Section = _ESP:Section({
+		Name = "ESP Properties",
+		Side = "Left"
+	})
+
+	AddValues(ESP_Properties_Section, ESP_Properties.ESP, {}, "ESP_Propreties_")
+
+	ESP_Properties_Section:Dropdown({
+		Name = "Text Font",
+		Flag = "ESP_TextFont",
+		Content = Fonts,
+		Default = Fonts[ESP_Properties.ESP.Font + 1],
+		Callback = function(Value)
+			ESP_Properties.ESP.Font = Drawing.Fonts[Value]
+		end
+	})
+
+	ESP_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "ESP_TextTransparency",
+		Default = ESP_Properties.ESP.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.ESP.Transparency = Value / 10
+		end
+	})
+
+	ESP_Properties_Section:Slider({
+		Name = "Font Size",
+		Flag = "ESP_FontSize",
+		Default = ESP_Properties.ESP.Size,
+		Min = 1,
+		Max = 20,
+		Callback = function(Value)
+			ESP_Properties.ESP.Size = Value
+		end
+	})
+
+	ESP_Properties_Section:Slider({
+		Name = "Offset",
+		Flag = "ESP_Offset",
+		Default = ESP_Properties.ESP.Offset,
+		Min = 10,
+		Max = 30,
+		Callback = function(Value)
+			ESP_Properties.ESP.Offset = Value
+		end
+	})
+
+	local Tracer_Properties_Section = _ESP:Section({
+		Name = "Tracer Properties",
+		Side = "Right"
+	})
+
+	AddValues(Tracer_Properties_Section, ESP_Properties.Tracer, {}, "Tracer_Properties_")
+
+	Tracer_Properties_Section:Dropdown({
+		Name = "Position",
+		Flag = "Tracer_Position",
+		Content = TracerPositions,
+		Default = TracerPositions[ESP_Properties.Tracer.Position],
+		Callback = function(Value)
+			ESP_Properties.Tracer.Position = tablefind(TracerPositions, Value)
+		end
+	})
+
+	Tracer_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "Tracer_Transparency",
+		Default = ESP_Properties.Tracer.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.Tracer.Transparency = Value / 10
+		end
+	})
+
+	Tracer_Properties_Section:Slider({
+		Name = "Thickness",
+		Flag = "Tracer_Thickness",
+		Default = ESP_Properties.Tracer.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			ESP_Properties.Tracer.Thickness = Value
+		end
+	})
+
+	local HeadDot_Properties_Section = _ESP:Section({
+		Name = "Head Dot Properties",
+		Side = "Left"
+	})
+
+	AddValues(HeadDot_Properties_Section, ESP_Properties.HeadDot, {}, "HeadDot_Properties_")
+
+	HeadDot_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "HeadDot_Transparency",
+		Default = ESP_Properties.HeadDot.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.HeadDot.Transparency = Value / 10
+		end
+	})
+
+	HeadDot_Properties_Section:Slider({
+		Name = "Thickness",
+		Flag = "HeadDot_Thickness",
+		Default = ESP_Properties.HeadDot.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			ESP_Properties.HeadDot.Thickness = Value
+		end
+	})
+
+	HeadDot_Properties_Section:Slider({
+		Name = "Sides",
+		Flag = "HeadDot_Sides",
+		Default = ESP_Properties.HeadDot.NumSides,
+		Min = 3,
+		Max = 30,
+		Callback = function(Value)
+			ESP_Properties.HeadDot.NumSides = Value
+		end
+	})
+
+	local Chams_Properties_Section = _ESP:Section({
+		Name = "Chams Properties",
+		Side = "Right"
+	})
+
+	AddValues(Chams_Properties_Section, ESP_Properties.Chams, {}, "Chams_Properties_")
+
+	Chams_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "Chams_Transparency",
+		Default = ESP_Properties.Chams.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.Chams.Transparency = Value / 10
+		end
+	})
+
+	Chams_Properties_Section:Slider({
+		Name = "Thickness",
+		Flag = "Chams_Thickness",
+		Default = ESP_Properties.Chams.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			ESP_Properties.Chams.Thickness = Value
+		end
+	})
+
+	local Box_Properties_Section = _ESP:Section({
+		Name = "Box Properties",
+		Side = "Left"
+	})
+
+	AddValues(Box_Properties_Section, ESP_Properties.Box, {}, "Box_Properties_")
+
+	Box_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "Box_Transparency",
+		Default = ESP_Properties.Box.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.Box.Transparency = Value / 10
+		end
+	})
+
+	Box_Properties_Section:Slider({
+		Name = "Thickness",
+		Flag = "Box_Thickness",
+		Default = ESP_Properties.Box.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			ESP_Properties.Box.Thickness = Value
+		end
+	})
+
+	local HealthBar_Properties_Section = _ESP:Section({
+		Name = "Health Bar Properties",
+		Side = "Right"
+	})
+
+	AddValues(HealthBar_Properties_Section, ESP_Properties.HealthBar, {}, "HealthBar_Properties_")
+
+	HealthBar_Properties_Section:Dropdown({
+		Name = "Position",
+		Flag = "HealthBar_Position",
+		Content = HealthBarPositions,
+		Default = HealthBarPositions[ESP_Properties.HealthBar.Position],
+		Callback = function(Value)
+			ESP_Properties.HealthBar.Position = tablefind(HealthBarPositions, Value)
+		end
+	})
+
+	HealthBar_Properties_Section:Slider({
+		Name = "Transparency",
+		Flag = "HealthBar_Transparency",
+		Default = ESP_Properties.HealthBar.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			ESP_Properties.HealthBar.Transparency = Value / 10
+		end
+	})
+
+	HealthBar_Properties_Section:Slider({
+		Name = "Thickness",
+		Flag = "HealthBar_Thickness",
+		Default = ESP_Properties.HealthBar.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			ESP_Properties.HealthBar.Thickness = Value
+		end
+	})
+
+	HealthBar_Properties_Section:Slider({
+		Name = "Offset",
+		Flag = "HealthBar_Offset",
+		Default = ESP_Properties.HealthBar.Offset,
+		Min = 4,
+		Max = 12,
+		Callback = function(Value)
+			ESP_Properties.HealthBar.Offset = Value
+		end
+	})
+
+	HealthBar_Properties_Section:Slider({
+		Name = "Blue",
+		Flag = "HealthBar_Blue",
+		Default = ESP_Properties.HealthBar.Blue,
+		Min = 0,
+		Max = 255,
+		Callback = function(Value)
+			ESP_Properties.HealthBar.Blue = Value
+		end
+	})
+
+	--// Crosshair Tab
+
+	local Crosshair_Settings = _Crosshair:Section({
+		Name = "Crosshair Settings (1 / 2)",
+		Side = "Left"
+	})
+
+	Crosshair_Settings:Toggle({
+		Name = "Enabled",
+		Flag = "Crosshair_Enabled",
+		Default = Crosshair.Enabled,
+		Callback = function(Value)
+			Crosshair.Enabled = Value
+		end
+	})
+
+	Crosshair_Settings:Toggle({
+		Name = "Disable Cursor",
+		Flag = "Cursor_Enabled",
+		Default = false,
+		Callback = SetMouseIconVisibility
+	})
+
+	AddValues(Crosshair_Settings, Crosshair, {"Enabled"}, "Crosshair_")
+
+	Crosshair_Settings:Dropdown({
+		Name = "Position",
+		Flag = "Crosshair_Position",
+		Content = {"Mouse", "Center"},
+		Default = ({"Mouse", "Center"})[Crosshair.Position],
+		Callback = function(Value)
+			Crosshair.Position = Value == "Mouse" and 1 or 2
+		end
+	})
+
+	Crosshair_Settings:Slider({
+		Name = "Size",
+		Flag = "Crosshair_Size",
+		Default = Crosshair.Size,
+		Min = 1,
+		Max = 24,
+		Callback = function(Value)
+			Crosshair.Size = Value
+		end
+	})
+
+	Crosshair_Settings:Slider({
+		Name = "Gap Size",
+		Flag = "Crosshair_GapSize",
+		Default = Crosshair.GapSize,
+		Min = 0,
+		Max = 24,
+		Callback = function(Value)
+			Crosshair.GapSize = Value
+		end
+	})
+
+	Crosshair_Settings:Slider({
+		Name = "Rotation (Degrees)",
+		Flag = "Crosshair_Rotation",
+		Default = Crosshair.Rotation,
+		Min = -180,
+		Max = 180,
+		Callback = function(Value)
+			Crosshair.Rotation = Value
+		end
+	})
+
+	Crosshair_Settings:Slider({
+		Name = "Rotation Speed",
+		Flag = "Crosshair_RotationSpeed",
+		Default = Crosshair.RotationSpeed,
+		Min = 1,
+		Max = 20,
+		Callback = function(Value)
+			Crosshair.RotationSpeed = Value
+		end
+	})
+
+	Crosshair_Settings:Slider({
+		Name = "Pulsing Step",
+		Flag = "Crosshair_PulsingStep",
+		Default = Crosshair.PulsingStep,
+		Min = 0,
+		Max = 24,
+		Callback = function(Value)
+			Crosshair.PulsingStep = Value
+		end
+	})
+
+	local _Crosshair_Settings = _Crosshair:Section({
+		Name = "Crosshair Settings (2 / 2)",
+		Side = "Left"
+	})
+
+	_Crosshair_Settings:Slider({
+		Name = "Pulsing Speed",
+		Flag = "Crosshair_PulsingSpeed",
+		Default = Crosshair.PulsingSpeed,
+		Min = 1,
+		Max = 20,
+		Callback = function(Value)
+			Crosshair.PulsingSpeed = Value
+		end
+	})
+
+	_Crosshair_Settings:Slider({
+		Name = "Pulsing Boundary (Min)",
+		Flag = "Crosshair_Pulse_Min",
+		Default = Crosshair.PulsingBounds[1],
+		Min = 0,
+		Max = 24,
+		Callback = function(Value)
+			Crosshair.PulsingBounds[1] = Value
+		end
+	})
+
+	_Crosshair_Settings:Slider({
+		Name = "Pulsing Boundary (Max)",
+		Flag = "Crosshair_Pulse_Max",
+		Default = Crosshair.PulsingBounds[2],
+		Min = 0,
+		Max = 24,
+		Callback = function(Value)
+			Crosshair.PulsingBounds[2] = Value
+		end
+	})
+
+	_Crosshair_Settings:Slider({
+		Name = "Transparency",
+		Flag = "Crosshair_Transparency",
+		Default = Crosshair.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			Crosshair.Transparency = Value / 10
+		end
+	})
+
+	_Crosshair_Settings:Slider({
+		Name = "Thickness",
+		Flag = "Crosshair_Thickness",
+		Default = Crosshair.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			Crosshair.Thickness = Value
+		end
+	})
+
+	local Crosshair_CenterDot = _Crosshair:Section({
+		Name = "Center Dot Settings",
+		Side = "Right"
+	})
+
+	Crosshair_CenterDot:Toggle({
+		Name = "Enabled",
+		Flag = "Crosshair_CenterDot_Enabled",
+		Default = CenterDot.Enabled,
+		Callback = function(Value)
+			CenterDot.Enabled = Value
+		end
+	})
+
+	AddValues(Crosshair_CenterDot, CenterDot, {"Enabled"}, "Crosshair_CenterDot_")
+
+	Crosshair_CenterDot:Slider({
+		Name = "Size / Radius",
+		Flag = "Crosshair_CenterDot_Radius",
+		Default = CenterDot.Radius,
+		Min = 2,
+		Max = 8,
+		Callback = function(Value)
+			CenterDot.Radius = Value
+		end
+	})
+
+	Crosshair_CenterDot:Slider({
+		Name = "Sides",
+		Flag = "Crosshair_CenterDot_Sides",
+		Default = CenterDot.NumSides,
+		Min = 3,
+		Max = 30,
+		Callback = function(Value)
+			CenterDot.NumSides = Value
+		end
+	})
+
+	Crosshair_CenterDot:Slider({
+		Name = "Transparency",
+		Flag = "Crosshair_CenterDot_Transparency",
+		Default = CenterDot.Transparency * 10,
+		Min = 1,
+		Max = 10,
+		Callback = function(Value)
+			CenterDot.Transparency = Value / 10
+		end
+	})
+
+	Crosshair_CenterDot:Slider({
+		Name = "Thickness",
+		Flag = "Crosshair_CenterDot_Thickness",
+		Default = CenterDot.Thickness,
+		Min = 1,
+		Max = 5,
+		Callback = function(Value)
+			CenterDot.Thickness = Value
+		end
+	})
+
+	--// Settings Tab
+
+	local SettingsSection = Settings:Section({
+		Name = "Settings",
+		Side = "Left"
+	})
+
+	local ProfilesSection = Settings:Section({
+		Name = "Profiles",
+		Side = "Left"
+	})
+
+	local InformationSection = Settings:Section({
+		Name = "Information",
+		Side = "Right"
+	})
+
+	SettingsSection:Keybind({
+		Name = "Show / Hide GUI",
+		Flag = "UI Toggle",
+		Default = Enum.KeyCode.RightShift,
+		Blacklist = {Enum.UserInputType.MouseButton1, Enum.UserInputType.MouseButton2, Enum.UserInputType.MouseButton3},
+		Callback = function(_, NewKeybind)
+			if not NewKeybind then
+				GUI:Close()
+			end
+		end
+	})
+
+	SettingsSection:Button({
+		Name = "Unload Script",
+		Callback = function()
+			GUI:Unload()
+			ESP:Exit()
+			Aimbot:Exit()
+			getgenv().AirHubV2Loaded = nil
+		end
+	})
+
+	local ConfigList = ProfilesSection:Dropdown({
+		Name = "Configurations",
+		Flag = "Config Dropdown",
+		Content = GUI:GetConfigs()
+	})
+
+	ProfilesSection:Box({
+		Name = "Configuration Name",
+		Flag = "Config Name",
+		Placeholder = "Config Name"
+	})
+
+	ProfilesSection:Button({
+		Name = "Load Configuration",
+		Callback = function()
+			GUI:LoadConfig(GUI.flags["Config Dropdown"])
+		end
+	})
+
+	ProfilesSection:Button({
+		Name = "Delete Configuration",
+		Callback = function()
+			GUI:DeleteConfig(GUI.flags["Config Dropdown"])
+			ConfigList:Refresh(GUI:GetConfigs())
+		end
+	})
+
+	ProfilesSection:Button({
+		Name = "Save Configuration",
+		Callback = function()
+			GUI:SaveConfig(GUI.flags["Config Dropdown"] or GUI.flags["Config Name"])
+			ConfigList:Refresh(GUI:GetConfigs())
+		end
+	})
+
+	InformationSection:Label("Made by Exunys")
+
+	InformationSection:Button({
+		Name = "Copy GitHub",
+		Callback = function()
+			setclipboard("https://github.com/Exunys")
+		end
+	})
+
+	InformationSection:Label("AirTeam © 2022 - "..osdate("%Y"))
+
+	InformationSection:Button({
+		Name = "Copy Discord Invite",
+		Callback = function()
+			setclipboard("https://discord.gg/Ncz3H3quUZ")
+		end
+	})
+
+--[=[
+local MiscellaneousSection = Settings:Section({
+	Name = "Miscellaneous",
+	Side = "Right"
+})
+
+local TimeLabel = MiscellaneousSection:Label("...")
+local FPSLabel = MiscellaneousSection:Label("...")
+local PlayersLabel = MiscellaneousSection:Label("...")
+
+MiscellaneousSection:Button({
+    Name = "Rejoin",
+    Callback = Rejoin
+})
+
+delay(2, function()
+    spawn(function()
+        while wait(1) do
+            TimeLabel:Set(osdate("%c"))
+            PlayersLabel:Set(#Players:GetPlayers())
+        end
+    end)
+
+    RunService.RenderStepped:Connect(function(FPS)
+        FPSLabel:Set("FPS: "..mathfloor(1 / FPS))
+    end)
+end)
+]=]
+
+	--//
+
+	ESP.Load()
+	Aimbot.Load()
+	getgenv().AirHubV2Loaded = true
+end)
+
+ESP.Name = "ESP"
+ESP.Parent = MainGUI
+ESP.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+ESP.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ESP.BorderSizePixel = 0
+ESP.Position = UDim2.new(0.551502168, 0, 0.383050859, 0)
+ESP.Size = UDim2.new(0, 141, 0, 27)
+ESP.Font = Enum.Font.SourceSansBold
+ESP.Text = "ESP"
+ESP.TextColor3 = Color3.fromRGB(0, 0, 0)
+ESP.TextSize = 31.000
+
+UICorner_8.Parent = ESP
+ESP.MouseButton1Down:connect(function()
+	local plr = game.Players.LocalPlayer
+	local Char = script.Parent
+	local UIS = game:GetService("UserInputService")
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local boom = Instance.new("Part")
+
+	local Key = 'E'
+	local Debounce = true
+
+	UIS.InputBegan:Connect(function(Input, IsTyping)
+		if IsTyping then return end
+		if Input.KeyCode == Enum.KeyCode[Key] and Debounce then
+			Debounce = false
+			boom.Shape = "Ball"
+			local TweenService = game:GetService("TweenService")
+
+			local Plrs = game:GetService('Players')
+			local MyPlr = Plrs.LocalPlayer
+			repeat
+				wait()
+			until MyPlr.Character ~= nil
+			local MyChar = MyPlr.Character
+			local MyGui = game:GetService('CoreGui')
+			local RunS = game:GetService('RunService')
+			local Teams = game:GetService('Teams')
+			local C = workspace.CurrentCamera
+			repeat
+				RunS.RenderStepped:wait()
+			until C.ViewportSize.X > 0 and C.ViewportSize.Y > 0
+
+
+			local Settings = {
+				KeyCodeToToggle = 285, 
+				KeyCodeToScrollRight = 275, 
+				KeyCodeToScrollLeft = 276,
+				ColorCodes = {
+					Enemy = Color3.new(1, 0, 0), 
+					Ally = Color3.new(0, 1, 0), 
+				},
+				ShowTracers = true,
+				TracerOptions = {
+					ShowEnemies = true, 
+					ShowAllies = true,
+				},
+				ShowESP = true,
+				ESPOptions = {
+					ShowEnemies = true,
+					ShowAllies = true,
+					ShowHealth = true,
+					ShowName = true,
+					ShowDistance = true,
+				},
+				PlayerESPCrap = {},
+				PlayerCrap = {},
+				FakeCrap = {},
+			}
+			local CC = Settings.ColorCodes
+			local TO = Settings.TracerOptions
+			local ESPO = Settings.ESPOptions
+			local PESPC = Settings.PlayerESPCrap
+			local PC = Settings.PlayerCrap
+
+			local DONT_IGNORE = {
+				"Head",
+				"Torso",
+				"HumanoidRootPart",
+				"Left Arm",
+				"Right Arm",
+				"Left Leg",
+				"Right Leg",
+			}
+
+			function CheckNameToDontIgnore(Str)
+				for i, v in pairs(DONT_IGNORE) do
+					if (Str == v) then
+						return true
+					end
+				end
+
+				return false
+			end
+
+			local Called = 0
+			function AddShitToIgnoreList(Par)
+				Called = Called + 1
+				local Hint = Instance.new("Hint", workspace)
+				Hint.Text = "Called: " .. Called
+				-- Don't judge...
+				print("Preparing ESP...")
+				print("This could take a while...")
+				wait(5)
+				local function ScanEverything(Par)
+					for i, v in pairs(Par:GetChildren()) do
+						if not (CheckNameToDontIgnore(v.Name)) then
+							table.insert(Settings.FakeCrap, v)
+							print("Added " .. v.Name)
+							v.ChildAdded:connect(function(EEEE)
+								ScanEverything(EEEE)
+							end)
+							ScanEverything(v)
+						else
+							ScanEverything(v)
+						end
+					end
+				end
+
+				local function Scan(Par)
+					for i, v in pairs(Par:GetChildren()) do
+						if not (Plrs:FindFirstChild(v.Name)) then
+							table.insert(Settings.FakeCrap, v)
+							print("Added " .. v.Name)
+						else
+							ScanEverything(v)
+						end
+						RunS.RenderStepped:wait()
+					end
+				end
+				Scan(Par)
+			end
+
+			function RecursiveGetChildren(Par)
+				local returnValue = {}
+
+				local rgc
+				rgc = function(Par)
+					for i, c in next, Par:GetChildren() do
+						table.insert(returnValue, c)
+						rgc(c)
+					end
+				end
+
+				rgc(Par)
+
+				return returnValue
+			end
+
+			function CheckCameraForPlrModel(Plr)
+				local Find = C:FindFirstChild("ESPStuff " .. Plr.Name)
+				if (Find) then
+					local Find2 = Find:FindFirstChild("Tracer Stuff")
+					if not (Find2) then
+						local T = Instance.new("Model", Find)
+						T.Name = "Tracer Stuff"
+					end
+					Find2 = Find:FindFirstChild("ESP Stuff")
+					if not (Find2) then
+						local T = Instance.new("Model", Find)
+						T.Name = "ESP Stuff"
+					end
+					return Find
+				end
+				local mod = Instance.new("Model", C)
+				mod.Name = "ESPStuff " .. Plr.Name
+				local T = Instance.new("Model", mod)
+				T.Name = "Tracer Stuff"
+				local ESP = Instance.new("Model", mod)
+				ESP.Name = "ESP Stuff"
+				return mod
+			end
+
+			function UpdateTracerCrap(What, Plr)
+				if ((MyPlr.Character ~= nil and Plr.Character ~= nil) and (MyPlr.Character.PrimaryPart ~= nil and Plr.Character.PrimaryPart ~= nil)) then
+					if ((MyPlr.Character.PrimaryPart.Position - Plr.Character.PrimaryPart.Position).magnitude < 2000) then
+						local P = What.Part
+						P.Transparency = 0
+						local M = P.Mesh
+						if (Plr.Character == nil) then -- Only if the player character is nil do we wait for it, or updating the tracer would be laggy as fuck
+							repeat
+								RunS.RenderStepped:wait()
+							until Plr.Character ~= nil
+						end
+						local R = C:ScreenPointToRay(C.ViewportSize.X / 2, C.ViewportSize.Y, 0)
+						local Dist = (R.Origin - (Plr.Character.PrimaryPart.Position - Vector3.new(0, 3, 0))).magnitude
+						P.Size = Vector3.new(0.1, 0.1, Dist)
+						P.CFrame = CFrame.new(R.Origin, (Plr.Character.PrimaryPart.Position - Vector3.new(0, 4.5, 0))) * CFrame.new(0, 0, -Dist / 2)
+						P.BrickColor = BrickColor.new(
+							#Teams:GetChildren() > 0 and (
+							Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+								Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+							) or #Teams:GetChildren() <= 0 and CC.Enemy
+						)
+						M.Scale = Vector3.new(0.05, 0.05, P.Size.Z / Dist)
+					else
+						local P = What.Part
+						P.Transparency = 1
+					end
+				end
+			end
+
+
+			local Aim = 1
+			function UpdateESPGui(HealthBar, HealthTxt, Plr, DistTxt, PlrName)
+				if (Plr.Character == nil) then
+					repeat
+						RunS.RenderStepped:wait()
+					until Plr.Character ~= nil
+				end
+				if ((Plr.Character.PrimaryPart.Position - MyPlr.Character.PrimaryPart.Position).magnitude <= 2000) then
+					HealthBar.Parent.Parent.Visible = true
+				else
+					HealthBar.Parent.Parent.Visible = false
+				end
+				HealthBar.Size = UDim2.new(Plr.Character.Humanoid.Health / Plr.Character.Humanoid.MaxHealth, -2, 1, -2)
+				HealthTxt.Text = math.floor(Plr.Character.Humanoid.Health) .. "/" .. math.floor(Plr.Character.Humanoid.MaxHealth)
+				local Dist = (Plr.Character.PrimaryPart.Position - MyPlr.Character.PrimaryPart.Position).magnitude
+				DistTxt.Text = math.floor(Dist) .. " Studs"
+				PlrName.TextColor3 = (
+					#Teams:GetChildren() > 0 and (
+					Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+						Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+					) or #Teams:GetChildren() <= 0 and CC.Enemy
+				)
+				DistTxt.TextColor3 = (
+					#Teams:GetChildren() > 0 and (
+					Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+						Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+					) or #Teams:GetChildren() <= 0 and CC.Enemy
+				)
+			end
+
+			function UpdateESPCrap(What, Plr)
+				if ((MyPlr.Character ~= nil and Plr.Character ~= nil) and (MyPlr.Character.PrimaryPart ~= nil and Plr.Character.PrimaryPart ~= nil)) then
+					if ((MyPlr.Character.PrimaryPart.Position - Plr.Character.PrimaryPart.Position).magnitude < 2000) then
+						if (PC[Plr] ~= nil) then
+							local viewpoint = C.CoordinateFrame
+
+							local PDists = {}
+							for i, p in next, PC[Plr] do
+								table.insert(PDists, (viewpoint.p - i.Position).magnitude)
+							end
+
+							local nearestDistance = math.min(unpack(PDists))
+							local furthestDistance = math.max(unpack(PDists))
+
+							for i, p in next, PC[Plr] do
+								local O, M, S = unpack(p)
+
+
+								local Dist = (i.Position - viewpoint.p).magnitude
+								local DistMult = Aim + (Dist - nearestDistance) / (furthestDistance - nearestDistance)
+
+								O.Transparency = math.max(S + (i.Transparency * (1 - S)), 0.001)
+
+								local unit = (i.Position - viewpoint.p).unit * DistMult
+								local pos = viewpoint.p + unit
+
+								local OF = CFrame.new(pos) * CFrame.Angles(i.CFrame:toEulerAnglesXYZ())
+
+								O.CFrame = OF
+
+								local OS = DistMult / Dist
+
+								if (M == nil) then
+									O.Mesh.Scale = i.Size * OS
+								else
+									if (M:IsA("SpecialMesh") and M.MeshType.Name == "FileMesh") or (M:IsA("SpecialMesh") == false) then
+										O[M.Name].Scale = M.Scale * OS
+									else
+										O[M.Name].Scale = M.Scale * i.Size * OS
+									end
+								end
+
+								O.BrickColor = BrickColor.new(
+									#Teams:GetChildren() > 0 and (
+									Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+										Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+									) or #Teams:GetChildren() <= 0 and CC.Enemy
+								)
+							end
+
+							--print("Running")
+							local Mouse = MyPlr:GetMouse()
+							local R = Ray.new(Mouse.UnitRay.Origin, Mouse.UnitRay.Direction * 5000)
+							local RP = workspace:FindPartOnRayWithIgnoreList(R, Settings.FakeCrap, false, true)
+							if (RP ~= nil) then
+								local Find = Plrs:FindFirstChild(RP.Parent.Name) or Plrs:FindFirstChild(string.sub(RP.Parent.Name, string.len("ESPStuff ") + 1))
+								if ((Find and Find:IsA("Player")) and (Find ~= MyPlr and Find == Plr)) then
+									Aim = 500000
+									wait(3)
+								else
+									Aim = 1
+								end
+							else
+								Aim = 1
+							end
+						end
+					end
+				end
+			end
+
+			function CreateESPStuff(Plr)
+				local ESPModel = CheckCameraForPlrModel(Plr)
+				PESPC[Plr] = ESPModel
+				if (Settings.ShowTracers) then
+					local T = ESPModel["Tracer Stuff"]
+					if not (T:FindFirstChild(Plr.Name)) then
+						local mod = Instance.new("Model", T)
+						mod.Name = Plr.Name
+						local P = Instance.new("Part", mod)
+						P.FormFactor = "Custom"
+						P.Material = "Neon"
+						P.Transparency = 0
+						P.Anchored = true
+						P.Locked = true
+						P.CanCollide = false
+						table.insert(Settings.FakeCrap, P)
+						local M = Instance.new("BlockMesh", P)
+						RunS:BindToRenderStep("TracerUpdate " .. Plr.Name, Enum.RenderPriority.Character.Value - 1, function()
+							UpdateTracerCrap(mod, Plr)
+						end)
+					end
+				end
+				if (Settings.ShowESP) then
+					local ESP = ESPModel["ESP Stuff"]
+					local mod = Instance.new("Model", ESP)
+					mod.Name = Plr.Name
+					repeat
+						RunS.RenderStepped:wait()
+					until Plr.Character ~= nil
+					for i, v in next, RecursiveGetChildren(Plr.Character) do
+						if (v:IsA("BasePart")) then
+							local O = Instance.new("Part", mod)
+							O.Anchored = true
+							O.CanCollide = false
+							O.FormFactor = "Custom"
+							O.Size = Vector3.new(1, 1, 1)
+							O.Name = "Fake " .. v.Name
+							O.Material = "SmoothPlastic"
+							O.TopSurface = "SmoothNoOutlines"
+							O.BottomSurface = "SmoothNoOutlines"
+							O.FrontSurface = "SmoothNoOutlines"
+							O.BackSurface = "SmoothNoOutlines"
+							O.LeftSurface = "SmoothNoOutlines"
+							O.RightSurface = "SmoothNoOutlines"
+
+							local P = nil
+							local PMesh = nil
+							for ii, vv in next, RecursiveGetChildren(v) do
+								if (vv:IsA("DataModelMesh")) then
+									local ThisPMesh = vv:clone()
+
+									local meshChanged = vv.Changed:connect(function(Prop)
+										if (Prop == "MeshType" or Prop == "MeshId" or Prop == "TextureProp") then
+											ThisPMesh[Prop] = vv[Prop]
+										end
+									end)
+
+									PMesh = ThisPMesh
+								elseif (vv:IsA("FaceInstance")) then
+									vv:clone().Parent = O
+								end
+							end
+
+							if (PMesh == nil) then
+								local M = Instance.new("BlockMesh", O)
+							else
+								PMesh:clone().Parent = O
+							end
+
+							if (O.Name == "Fake Head") then
+								local Info = Instance.new("BillboardGui", O.Mesh)
+								Info.Name = "ESPStats"
+								Info.Adornee = O
+								Info.Size = UDim2.new(0, 100, 0, 75)
+								Info.ExtentsOffset = Vector3.new(0, 0.3, 0)
+
+								local Stats = Instance.new("Frame", Info)
+								Stats.BackgroundTransparency = 1
+								Stats.Name = "Stats"
+								Stats.Size = UDim2.new(1, 0, 1, 0)
+								Stats.Visible = false
+
+								local Health = Instance.new("Frame", Stats)
+								Health.Name = "HealthBG"
+								Health.BackgroundColor3 = Color3.new(0, 0, 0)
+								Health.BorderSizePixel = 0
+								Health.Position = UDim2.new(0, 0, 0, 25)
+								Health.Size = UDim2.new(1, 0, 0, 25)
+
+								local HealthBG = Instance.new("Frame", Health)
+								HealthBG.Name = "Health"
+								HealthBG.BackgroundColor3 = Color3.new(0, 1, 0)
+								HealthBG.BorderSizePixel = 0
+								HealthBG.Position = UDim2.new(0, 1, 0, 1)
+								HealthBG.Size = UDim2.new(1, -2, 1, -2)
+
+								local HealthNum = Instance.new("TextLabel", Health)
+								HealthNum.Name = "HealthNum"
+								HealthNum.BackgroundTransparency = 1
+								HealthNum.Size = UDim2.new(1, 0, 1, 0)
+								HealthNum.Font = "Legacy"
+								HealthNum.FontSize = "Size8"
+								HealthNum.Text = "???"
+								HealthNum.TextColor3 = Color3.new(1, 0, 0)
+
+								local PlrName = Instance.new("TextLabel", Stats)
+								PlrName.Name = "PlrName"
+								PlrName.BackgroundTransparency = 1
+								PlrName.Size = UDim2.new(1, 0, 0, 25)
+								PlrName.Font = "Legacy"
+								PlrName.FontSize = "Size8"
+								PlrName.Text = Plr.Name
+								PlrName.TextColor3 = (
+									#Teams:GetChildren() > 0 and (
+									Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+										Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+									) or #Teams:GetChildren() <= 0 and CC.Enemy
+								)
+
+								local PlrDist = PlrName:clone()
+								PlrDist.Parent = PlrName.Parent
+								PlrDist.Name = "Dist"
+								PlrDist.Text = "???"
+								PlrDist.Position = UDim2.new(0, 0, 0, 50)
+								PlrDist.TextColor3 = (
+									#Teams:GetChildren() > 0 and (
+									Plr.TeamColor == MyPlr.TeamColor and CC.Ally or
+										Plr.TeamColor ~= MyPlr.TeamColor and CC.Enemy
+									) or #Teams:GetChildren() <= 0 and CC.Enemy
+								)
+								RunS:BindToRenderStep("UpdateESPGui " .. Plr.Name, Enum.RenderPriority.Character.Value - 1, function()
+									UpdateESPGui(HealthBG, HealthNum, Plr, PlrDist, PlrName)
+								end)
+							end
+
+							if (PC[Plr] == nil) then
+								PC[Plr] = {}
+							end
+							PC[Plr][v] = {O, PMesh, 0}
+							table.insert(Settings.FakeCrap, O)
+							table.insert(Settings.FakeCrap, PMesh)
+						end
+					end
+					RunS:BindToRenderStep("UpdateESP " .. Plr.Name, Enum.RenderPriority.Character.Value - 1, function()
+						UpdateESPCrap(mod, Plr)
+					end)
+				end
+			end
+
+			function RemoveESP(Plr)
+				RunS:UnbindFromRenderStep("UpdateESP " .. Plr.Name)
+				RunS:UnbindFromRenderStep("UpdateESPGui " .. Plr.Name)
+				local Find = C:FindFirstChild("ESPStuff " .. Plr.Name)
+				if (Find) then
+					Find = Find:FindFirstChild("ESP Stuff")
+					if (Find) then
+						Find:Destroy()
+					end
+				end
+				PC[Plr] = {}
+			end
+
+			function OnCharacterAdded(Char, Plr)
+				RemoveESP(Plr)
+				CreateESPStuff(Plr)
+				-- Added shit to ingore list
+			end
+
+			function OnPlayerAdded(Plr)
+				CreateESPStuff(Plr)
+				Plr.CharacterAdded:connect(function(Char)
+					OnCharacterAdded(Char, Plr)
+				end)
+			end
+
+			function OnPlayerRemoved(Plr)
+				RunS:UnbindFromRenderStep("TracerUpdate " .. Plr.Name)
+				RunS:UnbindFromRenderStep("UpdateESP " .. Plr.Name)
+				RunS:UnbindFromRenderStep("UpdateESPGui " .. Plr.Name)
+				local Find = C:FindFirstChild("ESPStuff " .. Plr.Name)
+				if (Find) then
+					Find:Destroy()
+				end
+			end
+
+			function GetCurrentPlayers()
+				for i, v in pairs(Plrs:GetPlayers()) do
+					if (v ~= MyPlr) then
+						CreateESPStuff(v)
+						v.CharacterAdded:connect(function(Char)
+							OnCharacterAdded(Char, v)
+						end)
+					end
+				end
+			end
+
+			print("Please wait....")
+			wait(0.5)
+			AddShitToIgnoreList(workspace)
+			GetCurrentPlayers()
+			Plrs.PlayerAdded:connect(OnPlayerAdded)
+			Plrs.PlayerRemoving:connect(OnPlayerRemoved)
+		end
+	end)
+end)
+
+-- Scripts:
+
+local function NUFVJ_fake_script() -- ScreenGui.Script 
+	local script = Instance.new('Script', ScreenGui)
+
+	frame = script.Parent.MainGUI -- Take out {}s, and put name of frame
+	frame.Draggable = true
+	frame.Active = true
+	frame.Selectable = true
+end
+coroutine.wrap(NUFVJ_fake_script)()
+local function LZJN_fake_script() -- ScreenGui.LocalScript 
+	local script = Instance.new('LocalScript', ScreenGui)
+
+	local ScreenGui = Instance.new("ScreenGui")
+	ScreenGui.ResetOnSpawn = false
+	ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+end
+coroutine.wrap(LZJN_fake_script)()
