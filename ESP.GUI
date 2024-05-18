@@ -47,7 +47,7 @@ devil.BackgroundTransparency = 1.000
 devil.Position = UDim2.new(0.0133928126, 0, 0.15384616, 0)
 devil.Size = UDim2.new(0, 141, 0, 18)
 devil.Font = Enum.Font.Unknown
-devil.Text = "execute.tabs ESP"
+devil.Text = "execute.tabs"
 devil.TextColor3 = Color3.fromRGB(255, 255, 255)
 devil.TextSize = 15.000
 devil.TextXAlignment = Enum.TextXAlignment.Left
@@ -95,7 +95,7 @@ ESPlabel.Size = UDim2.new(0, 79, 0, 40)
 ESPlabel.Font = Enum.Font.Unknown
 ESPlabel.Text = "ESP"
 ESPlabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-ESPlabel.TextSize = 44.000
+ESPlabel.TextSize = 30.000
 
 -- Scripts:
 
@@ -121,29 +121,29 @@ local function SQQS_fake_script() -- devil.LocalScript
 	while true do
 		wait(5)
 		local text = script.Parent
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs'
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs'
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs'
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(.1)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 		wait(5)
-		text.Text = 'execute.tabs Universal GUI'
+		text.Text = 'execute.tabs '
 	end
 end
 coroutine.wrap(SQQS_fake_script)()
