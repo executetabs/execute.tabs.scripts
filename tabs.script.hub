@@ -344,7 +344,7 @@ Airhub.BorderSizePixel = 0
 Airhub.Position = UDim2.new(0.551502168, 0, 0.25762713, 0)
 Airhub.Size = UDim2.new(0, 141, 0, 27)
 Airhub.Font = Enum.Font.SourceSansBold
-Airhub.Text = "Airhub"
+Airhub.Text = "Airhub | DOWN"
 Airhub.TextColor3 = Color3.fromRGB(0, 0, 0)
 Airhub.TextSize = 31.000
 
@@ -1344,7 +1344,7 @@ ESP.BorderSizePixel = 0
 ESP.Position = UDim2.new(0.551502168, 0, 0.383050859, 0)
 ESP.Size = UDim2.new(0, 141, 0, 27)
 ESP.Font = Enum.Font.SourceSansBold
-ESP.Text = "ESP"
+ESP.Text = "ESP | DOWN"
 ESP.TextColor3 = Color3.fromRGB(0, 0, 0)
 ESP.TextSize = 31.000
 
