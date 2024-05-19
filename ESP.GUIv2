@@ -1,0 +1,172 @@
+-- Gui to Lua
+-- Version: 3.2
+-- Made by xtremagnet
+-- Instances:
+
+local MainUI = Instance.new("Frame")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local ESPtooggle = Instance.new("TextButton")
+local ESPlabel = Instance.new("TextLabel")
+local Frame_2 = Instance.new("Frame")
+local devil = Instance.new("TextLabel")
+local exit = Instance.new("TextButton")
+
+--Properties:
+
+MainUI.Name = "MainUI"
+MainUI.Parent = game.StarterGui.ScreenGui
+MainUI.BackgroundColor3 = Color3.fromRGB(255, 60, 34)
+MainUI.BackgroundTransparency = 0.450
+MainUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainUI.BorderSizePixel = 6
+MainUI.Position = UDim2.new(0.40304184, 0, 0.496254683, 0)
+MainUI.Size = UDim2.new(0, 179, 0, 102)
+
+Frame.Parent = MainUI
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.055131454, 0, 0.0979943871, 0)
+Frame.Size = UDim2.new(0, 160, 0, 79)
+
+UICorner.Parent = Frame
+
+ESPtooggle.Name = "ESPtooggle"
+ESPtooggle.Parent = Frame
+ESPtooggle.BackgroundColor3 = Color3.fromRGB(252, 63, 63)
+ESPtooggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ESPtooggle.BorderSizePixel = 3
+ESPtooggle.ClipsDescendants = true
+ESPtooggle.Position = UDim2.new(0.733509421, 0, 0.333838731, 0)
+ESPtooggle.Size = UDim2.new(0, 27, 0, 27)
+ESPtooggle.AutoButtonColor = false
+ESPtooggle.Font = Enum.Font.SourceSans
+ESPtooggle.Text = " "
+ESPtooggle.TextColor3 = Color3.fromRGB(59, 255, 15)
+ESPtooggle.TextSize = 14.000
+
+ESPlabel.Name = "ESPlabel"
+ESPlabel.Parent = Frame
+ESPlabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ESPlabel.BackgroundTransparency = 1.000
+ESPlabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ESPlabel.BorderSizePixel = 0
+ESPlabel.Position = UDim2.new(0.164011568, 0, 0.251456738, 0)
+ESPlabel.Size = UDim2.new(0, 79, 0, 40)
+ESPlabel.Font = Enum.Font.Unknown
+ESPlabel.Text = "ESP"
+ESPlabel.TextColor3 = Color3.fromRGB(255, 62, 62)
+ESPlabel.TextSize = 44.000
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(-0.105657771, 0, -0.484031379, 0)
+Frame_2.Size = UDim2.new(0, 193, 0, 28)
+
+devil.Name = "devil"
+devil.Parent = Frame_2
+devil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+devil.BackgroundTransparency = 1.000
+devil.Position = UDim2.new(0.0626012012, 0, 0.177249908, 0)
+devil.Size = UDim2.new(0, 141, 0, 18)
+devil.Font = Enum.Font.Unknown
+devil.Text = "xtremagnet esp GUI"
+devil.TextColor3 = Color3.fromRGB(255, 75, 75)
+devil.TextSize = 15.000
+devil.TextStrokeTransparency = 0.000
+devil.TextXAlignment = Enum.TextXAlignment.Left
+
+exit.Name = "exit"
+exit.Parent = Frame_2
+exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+exit.BackgroundTransparency = 1.000
+exit.Position = UDim2.new(0.811510026, 0, -0.0172135495, 0)
+exit.Size = UDim2.new(0, 26, 0, 28)
+exit.Font = Enum.Font.ArialBold
+exit.Text = "X"
+exit.TextColor3 = Color3.fromRGB(255, 87, 87)
+exit.TextSize = 20.000
+exit.TextStrokeTransparency = 0.000
+
+-- Scripts:
+
+local function ZQNPRB_fake_script() -- ESPtooggle.LocalScript 
+	local script = Instance.new('LocalScript', ESPtooggle)
+
+	local player=game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	lol = true
+	script.Parent.MouseButton1Click:Connect(function()
+		if lol == true then
+			local Players = game:GetService("Players"):GetChildren() -- Delete this and paste script
+			local RunService = game:GetService("RunService")
+			local highlight = Instance.new("Highlight")
+			highlight.Name = "Highlight"
+	
+			for i, v in pairs(Players) do
+				repeat wait() until v.Character
+				if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+					local highlightClone = highlight:Clone()
+					highlightClone.Adornee = v.Character
+					highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+					highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					highlightClone.Name = "Highlight"
+				end
+			end
+	
+			game.Players.PlayerAdded:Connect(function(player)
+				repeat wait() until player.Character
+				if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+					local highlightClone = highlight:Clone()
+					highlightClone.Adornee = player.Character
+					highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+					highlightClone.Name = "Highlight"
+				end
+			end)
+	
+			game.Players.PlayerRemoving:Connect(function(playerRemoved)
+				playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+			end)
+	
+			RunService.Heartbeat:Connect(function()
+				for i, v in pairs(Players) do
+					repeat wait() until v.Character
+					if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+						local highlightClone = highlight:Clone()
+						highlightClone.Adornee = v.Character
+						highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+						highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+						highlightClone.Name = "Highlight"
+						task.wait()
+					end
+				end
+			end)
+		end
+	end)
+end
+coroutine.wrap(ZQNPRB_fake_script)()
+local function EXJPZ_fake_script() -- exit.LocalScript 
+	local script = Instance.new('LocalScript', exit)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent:TweenPosition(UDim2.new(10,0,0),"Out","Quad",15,false,nil)
+		game.StarterGui:SetCore("SendNotification", {
+			Title = 'from: xtremagnet',
+		Text = 'Thank you for using, '..game.Players.LocalPlayer.Name..'!'
+		})
+		wait(4)
+		script.Parent.Parent.Parent.Parent:Destroy()
+	end)
+	
+	script.Parent.MouseEnter:Connect(function()
+		script.Parent.TextSize = 24
+	end)
+	
+	script.Parent.MouseLeave:Connect(function()
+		script.Parent.TextSize = 20
+	end)
+end
+coroutine.wrap(EXJPZ_fake_script)()
