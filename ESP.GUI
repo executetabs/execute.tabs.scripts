@@ -1,197 +1,99 @@
 -- Gui to Lua
 -- Version: 3.2
--- By execute.tabs
+-- Made byy xtremagnet
 -- Instances:
 
-local ScreenGui = Instance.new("ScreenGui")
-local main = Instance.new("Frame")
-local beaunty = Instance.new("Frame")
-local lol = Instance.new("Frame")
-local devil = Instance.new("TextLabel")
-local lol_2 = Instance.new("Frame")
-local exit = Instance.new("TextButton")
+local MainUI = Instance.new("Frame")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
 local ESPtooggle = Instance.new("TextButton")
 local ESPlabel = Instance.new("TextLabel")
+local Frame_2 = Instance.new("Frame")
+local devil = Instance.new("TextLabel")
+local exit = Instance.new("TextButton")
 
 --Properties:
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MainUI.Name = "MainUI"
+MainUI.Parent = game.StarterGui.ScreenGui
+MainUI.BackgroundColor3 = Color3.fromRGB(255, 60, 34)
+MainUI.BackgroundTransparency = 0.450
+MainUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainUI.BorderSizePixel = 6
+MainUI.Position = UDim2.new(0.40304184, 0, 0.496254683, 0)
+MainUI.Size = UDim2.new(0, 179, 0, 102)
 
-main.Name = "main"
-main.Parent = ScreenGui
-main.Active = true
-main.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-main.BorderSizePixel = 0
-main.Position = UDim2.new(0.173055589, 0, 0.550321162, 0)
-main.Size = UDim2.new(0, 143, 0, 81)
+Frame.Parent = MainUI
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.055131454, 0, 0.0979943871, 0)
+Frame.Size = UDim2.new(0, 160, 0, 79)
 
-beaunty.Name = "beaunty"
-beaunty.Parent = main
-beaunty.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
-beaunty.BorderSizePixel = 0
-beaunty.Position = UDim2.new(0, 0, -0.320987642, 0)
-beaunty.Size = UDim2.new(0, 143, 0, 26)
-
-lol.Name = "lol"
-lol.Parent = beaunty
-lol.BackgroundColor3 = Color3.fromRGB(216, 0, 3)
-lol.BorderSizePixel = 0
-lol.Position = UDim2.new(0, 0, -0.0144618107, 0)
-lol.Size = UDim2.new(0, 143, 0, 2)
-
-devil.Name = "devil"
-devil.Parent = beaunty
-devil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-devil.BackgroundTransparency = 1.000
-devil.Position = UDim2.new(0.0133928126, 0, 0.15384616, 0)
-devil.Size = UDim2.new(0, 141, 0, 18)
-devil.Font = Enum.Font.Unknown
-devil.Text = "execute.tabs"
-devil.TextColor3 = Color3.fromRGB(255, 255, 255)
-devil.TextSize = 15.000
-devil.TextXAlignment = Enum.TextXAlignment.Left
-
-lol_2.Name = "lol"
-lol_2.Parent = beaunty
-lol_2.BackgroundColor3 = Color3.fromRGB(216, 0, 3)
-lol_2.BorderSizePixel = 0
-lol_2.Position = UDim2.new(0, 0, 0.985538185, 0)
-lol_2.Size = UDim2.new(0, 143, 0, 2)
-
-exit.Name = "exit"
-exit.Parent = beaunty
-exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-exit.BackgroundTransparency = 1.000
-exit.Position = UDim2.new(0.768342972, 0, -0.0384615399, 0)
-exit.Size = UDim2.new(0, 26, 0, 28)
-exit.Font = Enum.Font.ArialBold
-exit.Text = "X"
-exit.TextColor3 = Color3.fromRGB(255, 255, 255)
-exit.TextSize = 20.000
+UICorner.Parent = Frame
 
 ESPtooggle.Name = "ESPtooggle"
-ESPtooggle.Parent = main
-ESPtooggle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ESPtooggle.BorderColor3 = Color3.fromRGB(22, 22, 22)
-ESPtooggle.BorderSizePixel = 2
+ESPtooggle.Parent = Frame
+ESPtooggle.BackgroundColor3 = Color3.fromRGB(252, 63, 63)
+ESPtooggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ESPtooggle.BorderSizePixel = 3
 ESPtooggle.ClipsDescendants = true
-ESPtooggle.Position = UDim2.new(0.649461865, 0, 0.324839652, 0)
+ESPtooggle.Position = UDim2.new(0.733509421, 0, 0.333838731, 0)
 ESPtooggle.Size = UDim2.new(0, 27, 0, 27)
 ESPtooggle.AutoButtonColor = false
 ESPtooggle.Font = Enum.Font.SourceSans
 ESPtooggle.Text = " "
-ESPtooggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+ESPtooggle.TextColor3 = Color3.fromRGB(59, 255, 15)
 ESPtooggle.TextSize = 14.000
 
 ESPlabel.Name = "ESPlabel"
-ESPlabel.Parent = main
+ESPlabel.Parent = Frame
 ESPlabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ESPlabel.BackgroundTransparency = 1.000
 ESPlabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ESPlabel.BorderSizePixel = 0
-ESPlabel.Position = UDim2.new(0.00776149519, 0, 0.251456559, 0)
+ESPlabel.Position = UDim2.new(0.164011568, 0, 0.251456738, 0)
 ESPlabel.Size = UDim2.new(0, 79, 0, 40)
 ESPlabel.Font = Enum.Font.Unknown
 ESPlabel.Text = "ESP"
-ESPlabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-ESPlabel.TextSize = 30.000
+ESPlabel.TextColor3 = Color3.fromRGB(255, 62, 62)
+ESPlabel.TextSize = 44.000
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(-0.105657771, 0, -0.484031379, 0)
+Frame_2.Size = UDim2.new(0, 193, 0, 28)
+
+devil.Name = "devil"
+devil.Parent = Frame_2
+devil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+devil.BackgroundTransparency = 1.000
+devil.Position = UDim2.new(0.0626012012, 0, 0.177249908, 0)
+devil.Size = UDim2.new(0, 141, 0, 18)
+devil.Font = Enum.Font.Unknown
+devil.Text = "xtremagnet esp GUI"
+devil.TextColor3 = Color3.fromRGB(255, 75, 75)
+devil.TextSize = 15.000
+devil.TextStrokeTransparency = 0.000
+devil.TextXAlignment = Enum.TextXAlignment.Left
+
+exit.Name = "exit"
+exit.Parent = Frame_2
+exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+exit.BackgroundTransparency = 1.000
+exit.Position = UDim2.new(0.811510026, 0, -0.0172135495, 0)
+exit.Size = UDim2.new(0, 26, 0, 28)
+exit.Font = Enum.Font.ArialBold
+exit.Text = "X"
+exit.TextColor3 = Color3.fromRGB(255, 87, 87)
+exit.TextSize = 20.000
+exit.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function DQSQAN_fake_script() -- lol.LocalScript 
-	local script = Instance.new('LocalScript', lol)
-
-	while true do
-		for i=255,200,-2 do
-			script.Parent.BackgroundColor3 = Color3.fromRGB(i,0,0)
-			wait()
-		end
-		wait(.1)
-		for i=200,255,2 do
-			script.Parent.BackgroundColor3 = Color3.fromRGB(i,0,0)
-			wait()
-		end
-	end
-end
-coroutine.wrap(DQSQAN_fake_script)()
-local function SQQS_fake_script() -- devil.LocalScript 
-	local script = Instance.new('LocalScript', devil)
-
-	while true do
-		wait(5)
-		local text = script.Parent
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs'
-		wait(.1)
-		text.Text = 'execute.tabs'
-		wait(.1)
-		text.Text = 'execute.tabs'
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(.1)
-		text.Text = 'execute.tabs '
-		wait(5)
-		text.Text = 'execute.tabs '
-	end
-end
-coroutine.wrap(SQQS_fake_script)()
-local function MWXXDG_fake_script() -- lol_2.LocalScript 
-	local script = Instance.new('LocalScript', lol_2)
-
-	while true do
-		for i=255,200,-2 do
-			script.Parent.BackgroundColor3 = Color3.fromRGB(i,0,0)
-			wait()
-		end
-		wait(.1)
-		for i=200,255,2 do
-			script.Parent.BackgroundColor3 = Color3.fromRGB(i,0,0)
-			wait()
-		end
-	end
-end
-coroutine.wrap(MWXXDG_fake_script)()
-local function DHKHUA_fake_script() -- exit.LocalScript 
-	local script = Instance.new('LocalScript', exit)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		script.Parent.Parent.Parent:TweenPosition(UDim2.new(10,0,0),"Out","Quad",15,false,nil)
-		game.StarterGui:SetCore("SendNotification", {
-		Title = 'Execute.Tabs GUI',
-		Text = 'Thank you for using, '..game.Players.LocalPlayer.Name..'!'
-		})
-		wait(4)
-		script.Parent.Parent.Parent.Parent:Destroy()
-	end)
-	
-	script.Parent.MouseEnter:Connect(function()
-		script.Parent.TextSize = 24
-	end)
-	
-	script.Parent.MouseLeave:Connect(function()
-		script.Parent.TextSize = 20
-	end)
-end
-coroutine.wrap(DHKHUA_fake_script)()
-local function AOCY_fake_script() -- main.LocalScript 
-	local script = Instance.new('LocalScript', main)
-
-	script.Parent.Draggable = true
-end
-coroutine.wrap(AOCY_fake_script)()
-local function IIAOBML_fake_script() -- ESPtooggle.LocalScript 
+local function ZQNPRB_fake_script() -- ESPtooggle.LocalScript 
 	local script = Instance.new('LocalScript', ESPtooggle)
 
 	local player=game.Players.LocalPlayer
@@ -245,4 +147,26 @@ local function IIAOBML_fake_script() -- ESPtooggle.LocalScript
 		end
 	end)
 end
-coroutine.wrap(IIAOBML_fake_script)()
+coroutine.wrap(ZQNPRB_fake_script)()
+local function EXJPZ_fake_script() -- exit.LocalScript 
+	local script = Instance.new('LocalScript', exit)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent:TweenPosition(UDim2.new(10,0,0),"Out","Quad",15,false,nil)
+		game.StarterGui:SetCore("SendNotification", {
+			Title = 'from: xtremagnet',
+		Text = 'Thank you for using, '..game.Players.LocalPlayer.Name..'!'
+		})
+		wait(4)
+		script.Parent.Parent.Parent.Parent:Destroy()
+	end)
+	
+	script.Parent.MouseEnter:Connect(function()
+		script.Parent.TextSize = 24
+	end)
+	
+	script.Parent.MouseLeave:Connect(function()
+		script.Parent.TextSize = 20
+	end)
+end
+coroutine.wrap(EXJPZ_fake_script)()
