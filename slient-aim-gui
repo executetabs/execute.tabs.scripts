@@ -246,7 +246,7 @@ Library:SetWatermark("Made By xtremagnet on discord")
 local Window = Library:CreateWindow({Title = 'Universal Silent Aim - xtremagnet', Center = true, AutoShow = true, TabPadding = 8, MenuFadeTime = 0.2})
 local GeneralTab = Window:AddTab("General")
 local MainBOX = GeneralTab:AddLeftTabbox("Main") do
-	local Main = MainBOX:AddTab("Main")
+	local Main = MainBOX:AddTab("SlientAim")
 
 	Main:AddToggle("aim_Enabled", {Text = "Enabled"}):AddKeyPicker("aim_Enabled_KeyPicker", {Default = "RightAlt", SyncToggleState = true, Mode = "Toggle", Text = "Enabled", NoUI = false});
 	Options.aim_Enabled_KeyPicker:OnClick(function()
