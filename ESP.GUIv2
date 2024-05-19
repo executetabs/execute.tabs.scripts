@@ -1,34 +1,37 @@
 -- Gui to Lua
 -- Version: 3.2
--- Made by xtremagnet
+-- Made by Xtremagnet
 -- Instances:
 
+local ScreenGui = Instance.new("ScreenGui")
 local MainUI = Instance.new("Frame")
 local Frame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local ESPtooggle = Instance.new("TextButton")
 local ESPlabel = Instance.new("TextLabel")
-local Frame_2 = Instance.new("Frame")
 local devil = Instance.new("TextLabel")
 local exit = Instance.new("TextButton")
 
 --Properties:
 
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
 MainUI.Name = "MainUI"
-MainUI.Parent = game.StarterGui.ScreenGui
+MainUI.Parent = ScreenGui
 MainUI.BackgroundColor3 = Color3.fromRGB(255, 60, 34)
 MainUI.BackgroundTransparency = 0.450
 MainUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainUI.BorderSizePixel = 6
-MainUI.Position = UDim2.new(0.40304184, 0, 0.496254683, 0)
-MainUI.Size = UDim2.new(0, 179, 0, 102)
+MainUI.Position = UDim2.new(0.40304184, 0, 0.453183532, 0)
+MainUI.Size = UDim2.new(0, 179, 0, 125)
 
 Frame.Parent = MainUI
 Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.055131454, 0, 0.0979943871, 0)
-Frame.Size = UDim2.new(0, 160, 0, 79)
+Frame.Position = UDim2.new(0.0495448634, 0, 0.119999997, 0)
+Frame.Size = UDim2.new(0, 160, 0, 95)
 
 UICorner.Parent = Frame
 
@@ -38,7 +41,7 @@ ESPtooggle.BackgroundColor3 = Color3.fromRGB(252, 63, 63)
 ESPtooggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ESPtooggle.BorderSizePixel = 3
 ESPtooggle.ClipsDescendants = true
-ESPtooggle.Position = UDim2.new(0.733509421, 0, 0.333838731, 0)
+ESPtooggle.Position = UDim2.new(0.664759457, 0, 0.51278621, 0)
 ESPtooggle.Size = UDim2.new(0, 27, 0, 27)
 ESPtooggle.AutoButtonColor = false
 ESPtooggle.Font = Enum.Font.SourceSans
@@ -52,38 +55,30 @@ ESPlabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ESPlabel.BackgroundTransparency = 1.000
 ESPlabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ESPlabel.BorderSizePixel = 0
-ESPlabel.Position = UDim2.new(0.164011568, 0, 0.251456738, 0)
-ESPlabel.Size = UDim2.new(0, 79, 0, 40)
+ESPlabel.Position = UDim2.new(0.0827615708, 0, 0.483035773, 0)
+ESPlabel.Size = UDim2.new(0, 66, 0, 33)
 ESPlabel.Font = Enum.Font.Unknown
 ESPlabel.Text = "ESP"
 ESPlabel.TextColor3 = Color3.fromRGB(255, 62, 62)
-ESPlabel.TextSize = 44.000
-
-Frame_2.Parent = Frame
-Frame_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_2.BorderSizePixel = 0
-Frame_2.Position = UDim2.new(-0.105657771, 0, -0.484031379, 0)
-Frame_2.Size = UDim2.new(0, 193, 0, 28)
+ESPlabel.TextSize = 31.000
 
 devil.Name = "devil"
-devil.Parent = Frame_2
+devil.Parent = Frame
 devil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 devil.BackgroundTransparency = 1.000
-devil.Position = UDim2.new(0.0626012012, 0, 0.177249908, 0)
+devil.Position = UDim2.new(0.0126012806, 0, 0.121687077, 0)
 devil.Size = UDim2.new(0, 141, 0, 18)
 devil.Font = Enum.Font.Unknown
 devil.Text = "xtremagnet esp GUI"
 devil.TextColor3 = Color3.fromRGB(255, 75, 75)
-devil.TextSize = 15.000
 devil.TextStrokeTransparency = 0.000
 devil.TextXAlignment = Enum.TextXAlignment.Left
 
 exit.Name = "exit"
-exit.Parent = Frame_2
+exit.Parent = Frame
 exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 exit.BackgroundTransparency = 1.000
-exit.Position = UDim2.new(0.811510026, 0, -0.0172135495, 0)
+exit.Position = UDim2.new(0.736510098, 0, 0.0775233209, 0)
 exit.Size = UDim2.new(0, 26, 0, 28)
 exit.Font = Enum.Font.ArialBold
 exit.Text = "X"
@@ -93,7 +88,16 @@ exit.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function ZQNPRB_fake_script() -- ESPtooggle.LocalScript 
+local function MRXEB_fake_script() -- ScreenGui.LocalScript 
+	local script = Instance.new('LocalScript', ScreenGui)
+
+	frame = script.Parent.MainUI -- Take out {}s, and put name of frame
+	frame.Draggable = true
+	frame.Active = true
+	frame.Selectable = true
+end
+coroutine.wrap(MRXEB_fake_script)()
+local function MGBGN_fake_script() -- ESPtooggle.LocalScript 
 	local script = Instance.new('LocalScript', ESPtooggle)
 
 	local player=game.Players.LocalPlayer
@@ -147,8 +151,8 @@ local function ZQNPRB_fake_script() -- ESPtooggle.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZQNPRB_fake_script)()
-local function EXJPZ_fake_script() -- exit.LocalScript 
+coroutine.wrap(MGBGN_fake_script)()
+local function WIMCWLI_fake_script() -- exit.LocalScript 
 	local script = Instance.new('LocalScript', exit)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -169,4 +173,4 @@ local function EXJPZ_fake_script() -- exit.LocalScript
 		script.Parent.TextSize = 20
 	end)
 end
-coroutine.wrap(EXJPZ_fake_script)()
+coroutine.wrap(WIMCWLI_fake_script)()
